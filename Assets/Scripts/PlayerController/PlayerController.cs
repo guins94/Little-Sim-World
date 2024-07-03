@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Configuration")]
     [SerializeField] float moveSpeed;
+    [SerializeField] bool canInteract = false;
 
     // Cached Components
+    public Action IteractWithObject = null;
     private Vector2 playerInput = Vector2.zero; 
     public int coinsColleted = 0;
     
@@ -23,7 +26,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        ActionGroup.CoinCollected += CoinCollected;
         ActionGroup.OnGameStart += OnGameStart;
     }
 
@@ -35,7 +37,6 @@ public class PlayerController : MonoBehaviour
     void Delete()
     {
         ActionGroup.OnGameStart -= OnGameStart;
-        ActionGroup.CoinCollected -= CoinCollected;
     }
 
     /// <summary>
@@ -46,8 +47,20 @@ public class PlayerController : MonoBehaviour
         
         playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         playerAnimator.SetFloat("Speed", playerInput.magnitude);
-        Debug.Log("player speed"+ playerRigidbody.velocity);
+
+        if (Input.GetKeyDown(KeyCode.E) && canInteract)
+        {
+            HandleInteract();
+        }
     
+    }
+
+    /// <summary>
+    /// Handles map interactions with the player
+    /// </summary>
+    void HandleInteract()
+    {
+        IteractWithObject?.Invoke();
     }
 
     /// <summary>
@@ -66,36 +79,26 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void HandlesLookDirection()
     {
-        if (playerRigidbody.velocity.x > 0)
+        if (playerRigidbody.velocity.x >= 0.01)
         {
             if (this.gameObject.transform.localScale.x < 0)
             {
                 FlipCharacter();
             }
         }
-        else
+
+        if (playerRigidbody.velocity.x <= -0.01)
         {
             if (this.gameObject.transform.localScale.x > 0)
             {
                 FlipCharacter();
             }
         }
+
     }
 
     void FlipCharacter()
     {
         this.gameObject.transform.localScale = new Vector3(-this.gameObject.transform.localScale.x, this.gameObject.transform.localScale.y, this.gameObject.transform.localScale.z);
-    }
-
-    /// <summary>
-    /// Handles coin collection
-    /// </summary>
-    public void CoinCollected(int coins)
-    {
-        int maxCoinsCollected = 10;
-        if (coinsColleted + coins < maxCoinsCollected) coinsColleted += coins;
-        else coinsColleted = maxCoinsCollected;
-    }
-
-    
+    } 
 }
