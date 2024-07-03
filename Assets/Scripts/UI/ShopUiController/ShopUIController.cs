@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using TMPro;
 
 public class ShopUIController : MonoBehaviour
 {
+    [Header("Shop Components References")]
     [SerializeField] Sprite[] vectorItemSprite = null;
     [SerializeField] Image imageHolder = null;
     [SerializeField] Button buyButton = null;
@@ -15,6 +17,7 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] bool[] itemAvailable = new bool[] {true, true, true, true, true, true, true};
     
     private int itemIndex = 0;
+    public Action<Sprite> AddItem = null;
 
     void Start()
     {
@@ -32,13 +35,14 @@ public class ShopUIController : MonoBehaviour
 
     void BuyItem()
     {
-        if (itemAvailable[itemIndex] )
+        if (itemAvailable[itemIndex])
         {
             if (GameManager.GameManagerInstance.gold >= goldPrice[itemIndex])
             {
                 GameManager.GameManagerInstance.RemoveCoins(goldPrice[itemIndex]);
                 itemAvailable[itemIndex] = false;
                 UpdateItemAvaiabilityImage();
+                AddItem?.Invoke(vectorItemSprite[itemIndex]);
             }
             else
             {
