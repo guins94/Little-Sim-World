@@ -20,24 +20,6 @@ public class PlayerController : MonoBehaviour
     public Action IteractWithObject = null;
     private Vector2 playerInput = Vector2.zero; 
     public int coinsColleted = 0;
-    
-    /// <summary>
-    /// Starts to hear for coins gained
-    /// </summary>
-    void Start()
-    {
-        ActionGroup.OnGameStart += OnGameStart;
-    }
-
-    public void OnGameStart()
-    {
-        
-    }
-
-    void Delete()
-    {
-        ActionGroup.OnGameStart -= OnGameStart;
-    }
 
     /// <summary>
     /// Get the inputs and update the animator of the player
@@ -97,6 +79,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Looks in the direction it is walking
+    /// </summary>
     void FlipCharacter()
     {
         this.gameObject.transform.localScale = new Vector3(-this.gameObject.transform.localScale.x, this.gameObject.transform.localScale.y, this.gameObject.transform.localScale.z);

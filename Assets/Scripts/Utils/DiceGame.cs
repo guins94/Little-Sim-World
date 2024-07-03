@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Simple Dice game, cost 1 and every time it gets a double six on the dice the player earns 100 coins
+/// </summary>
 public class DiceGame : MonoBehaviour
 {
     [Header("Dice Game Components")]

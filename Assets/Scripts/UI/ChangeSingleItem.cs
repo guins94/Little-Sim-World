@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Changes a single item directly from the player SpriteRenderer
+/// </summary>
 public class ChangeSingleItem : MonoBehaviour
 {
     [Header("Change Item Components References")]
@@ -48,6 +51,9 @@ public class ChangeSingleItem : MonoBehaviour
         ItemHolderImage.sprite = ItemListSprite[itemIndex];
     }
 
+    /// <summary>
+    /// Item List Adding a sprite to the refered Customization Character 
+    /// </summary>
     public void AddToItemList(Sprite newSprite)
     {
         ItemListSprite.Add(newSprite);

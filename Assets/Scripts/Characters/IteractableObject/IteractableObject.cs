@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Iteractable Objects can be acessed using "E" button
+/// </summary>
 [RequireComponent(typeof(Collider2D))]
 public abstract class IteractableObject : MonoBehaviour
 {
@@ -17,6 +20,9 @@ public abstract class IteractableObject : MonoBehaviour
         GameManager.PlayerInstance.IteractWithObject += IteractionHandler;
     }
 
+    /// <summary>
+    /// Waits for the player to press a button
+    /// </summary>
     public void IteractionHandler()
     {
         if (canInteract) IteractionEffect();
@@ -24,6 +30,9 @@ public abstract class IteractableObject : MonoBehaviour
 
     public abstract void IteractionEffect();
 
+    /// <summary>
+    /// On Trigger Function makes the Chat Box appear
+    /// </summary>
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -33,6 +42,9 @@ public abstract class IteractableObject : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// On Trigger Function makes the Chat Box dissaper
+    /// </summary>
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

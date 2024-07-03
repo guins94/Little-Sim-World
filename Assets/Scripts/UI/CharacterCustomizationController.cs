@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Updates the character customization UI to get only the itens of the player
+/// </summary>
 public class CharacterCustomizationController : MonoBehaviour
 {
     [Header("ShopController Components References")]

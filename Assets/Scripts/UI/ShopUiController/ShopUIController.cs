@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Shop UI Controller Stores the shopkeeper Sprites and itens prices
+/// </summary>
 public class ShopUIController : MonoBehaviour
 {
     [Header("Shop Components References")]
