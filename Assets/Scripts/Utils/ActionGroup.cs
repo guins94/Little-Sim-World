@@ -6,6 +6,5 @@ using System;
 public static class ActionGroup
 {
     public static Action<int> CoinCollected = null;
-    public static Action CoinDeposit = null;
     public static Action OnGameStart = null;
 }
