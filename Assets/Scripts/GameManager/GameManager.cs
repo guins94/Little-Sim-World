@@ -6,18 +6,20 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager GameManagerInstance { get; protected set; } = null;
     public static PlayerController PlayerInstance { get; protected set; } = null;
+     public static CinemachineController CinemachineControllerInstance { get; protected set; } = null;
+    public int gold { get; protected set; } = 100;
 
-    public int gold { get; protected set; } = 5;
 
     void Awake()
     {
         GameManagerInstance = this;
         PlayerInstance = FindObjectOfType<PlayerController>();
+        CinemachineControllerInstance = FindObjectOfType<CinemachineController>();
     }
 
     public void AddCoins(int coins)
     {
-        gold += PlayerInstance.coinsColleted;
+        gold += coins;
         ActionGroup.CoinCollected?.Invoke(gold);
     }
 
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
         }
         ActionGroup.CoinCollected?.Invoke(gold);
     }
+
 
     public void QuitGame()
     {
