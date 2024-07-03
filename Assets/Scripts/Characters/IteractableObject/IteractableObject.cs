@@ -28,7 +28,6 @@ public abstract class IteractableObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //iteractableAreaCollider2D.enabled = false;
             EnableIteractionChatBoxHandler();
             canInteract = true;
         } 
@@ -38,7 +37,6 @@ public abstract class IteractableObject : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //iteractableAreaCollider2D.enabled = false;
             DisableIteractionChatBoxHandler();
             canInteract = false;
         } 
